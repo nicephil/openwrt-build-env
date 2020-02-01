@@ -4,7 +4,7 @@
 # Lisence: MIT
 # Author: leilei.wang
 #=================================================
-ARG IMAGE_TAG=latest
+ARG IMAGE_TAG=18.04
 FROM ubuntu:$IMAGE_TAG
 
 LABEL maintainer leilei.wang
