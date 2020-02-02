@@ -28,7 +28,7 @@ docker run \
     --name openwrt-build-env \
     -h COMPILER \
     -p 10022:22 \
-    -v /home/llwang/repos/openwrt:/home/user/openwrt \
+    -v /home/llwang/repos/:/home/llwang/repos \
     nicephil/openwrt-build-env
 ```
 
@@ -44,14 +44,14 @@ docker run \
 - Modify the UID and GID
   
   ```shell
-  docker exec openwrt-build-env sudo usermod -u 1001 user
-  docker exec openwrt-build-env sudo groupmod -g 1001 user
+  docker exec openwrt-build-env sudo usermod -u 1001  llwang
+  docker exec openwrt-build-env sudo groupmod -g 1001 asmc
   ```
 
 - Modify the file ownership
   
   ```shell
-  docker exec openwrt-build-env sudo chown -hR user:user .
+  docker exec openwrt-build-env sudo chown -hR llwang:asmc .
   ```
 
 - Restart container
@@ -62,19 +62,19 @@ docker run \
 
 ### SSH security settings
 
-The default SSH user name and password is `user`. If you are making the container accessible from the internet you'll probably want to secure it bit. You can do one of the following two things after launching the container:
+The default SSH user name and password is `llwang`. If you are making the container accessible from the internet you'll probably want to secure it bit. You can do one of the following two things after launching the container:
 
 - Change password:
   
   ```shell
-  docker exec -it openwrt-build-env sudo passwd user
+  docker exec -it openwrt-build-env sudo passwd llwang
   ```
 
 - Don't allow passwords at all, use keys instead:
   
   ```shell
-  docker cp ~/.ssh/authorized_keys openwrt-build-env:/home/user/.ssh
-  docker exec openwrt-build-env sudo chown user:user /home/user/.ssh/authorized_keys
+  docker cp ~/.ssh/authorized_keys openwrt-build-env:/home/llwang/.ssh
+  docker exec openwrt-build-env sudo chown llwang:asmc /home/llwang/.ssh/authorized_keys
   docker exec openwrt-build-env sudo sed -i '/PasswordAuthentication /c\PasswordAuthentication no' /etc/ssh/sshd_config
   docker restart openwrt-build-env
   ```
@@ -90,14 +90,14 @@ The default SSH user name and password is `user`. If you are making the containe
 - Connect via SSH.
   
   ```shell
-  ssh user@IP -p 10022
+  ssh llwang@IP -p 10022
   ```
 
 ### Clone source code and build
 
 ```shell
 git clone woolink/openwrt_lora.git
-cd openwrt
+cd openwrt_lora
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 make menuconfig

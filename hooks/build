@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t $IMAGE_NAME --build-arg IMAGE_TAG=$DOCKER_TAG .
+docker build -t $MY_IMAGE_NAME --build-arg MY_IMAGE_TAG=$MY_DOCKER_TAG MY_USER=$MY_USER MY_GROUP=$MY_GROUP.
