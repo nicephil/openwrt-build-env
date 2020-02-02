@@ -14,7 +14,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Shanghai \
     LANG=C.UTF-8
 
-COPY ./sources.list /etc/apt/sources.list
+COPY ./sources.list_${MY_IMAGE_TAG} /etc/apt/sources.list
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     apt-get update -qq && apt-get upgrade -qqy && \
