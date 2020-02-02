@@ -14,6 +14,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Shanghai \
     LANG=C.UTF-8
 
+ARG MY_IMAGE_TAG=16.04
 COPY ./sources.list_${MY_IMAGE_TAG} /etc/apt/sources.list
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
